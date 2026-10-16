@@ -21,41 +21,89 @@ int main() {
         return 0;
     }
 
+
     char content[100];
 
-    int symbol; //int porque fgetc devuelve en acii
+    while (1) 
+    {
+        
+        int contentStatus = fscanf(txtFile, "%99[^({# \n<]", content);
 
-    if (fscanf(txtFile, "%99[^(){}# \n<>]", content) == 0)
-    {
-        symbol = fgetc(txtFile);
-        fprintf(cFile,"%c", symbol);
-    }
-    
-    
-    while (fscanf(txtFile, "%99[^({# \n<]", content) == 1) 
-    {
-        
-        
-        if (strcmp(content, "incluir") == 0)
+        if (contentStatus == 1)
         {
-            fprintf(cFile, "include");
+            if (strcmp(content,"incluir") == 0)
+            {
+                fprintf(cFile,"include");
+            }
+            else if (strcmp(content,"si") == 0)
+            {
+                fprintf(cFile,"if");
+            }
+            else if (strcmp(content,"imprimir") == 0)
+            {
+                fprintf(cFile,"printf");
+            }
+            else if (strcmp(content,"ingresar") == 0)
+            {
+                fprintf(cFile,"scanf");
+            }
+            else if (strcmp(content,"retornar") == 0)
+            {
+                fprintf(cFile,"return");
+            }
+            else if (strcmp(content,"entero") == 0)
+            {
+                fprintf(cFile,"int");
+            }
+            else if (strcmp(content,"principal") == 0)
+            {
+                fprintf(cFile,"main");
+            }
+            else if (strcmp(content,"real") == 0)
+            {
+                fprintf(cFile,"float");
+            }
+            else if (strcmp(content,"mientras") == 0)
+            {
+                fprintf(cFile,"while");
+            }
+            else if (strcmp(content,"para") == 0)
+            {
+                fprintf(cFile,"for");
+            }
+            else if (strcmp(content,"sino") == 0)
+            {
+                fprintf(cFile,"else");
+            }
+            else if (strcmp(content,"caracter") == 0)
+            {
+                fprintf(cFile,"char");
+            }
+            else
+            {
+                fprintf(cFile,"%s", content);
+            }
+            
+            
         }
-        else if (strcmp(content, "imprimir") == 0)
+        else if (contentStatus == 0)
         {
-            fprintf(cFile, "printf");
+
+            int limit = fgetc(txtFile);
+            
+            
+            if (limit != EOF)
+            {
+                fprintf(cFile,"%c", limit);
+            }
+            
         }
         else
         {
-            fprintf(cFile, "%s", content);
+            break;
         }
         
         
-        symbol = fgetc(txtFile);
-        
-        if (symbol != EOF)
-        {
-            fprintf(cFile,"%c", symbol);
-        }
         
     
     }
