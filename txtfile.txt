@@ -1,0 +1,16 @@
+#incluir <stdio.h>
+
+entero principal() {
+    entero numero;
+
+    imprimir("Ingresa un numero entero: ");
+    ingresar("%d", &numero);
+
+    si (numero % 2 == 0) {
+        imprimir("El numero es par.\n");
+    } sino {
+        imprimir("El numero es impar.\n");
+    }
+
+    retornar 0;
+}
