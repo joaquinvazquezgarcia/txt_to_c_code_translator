@@ -1,0 +1,11 @@
+imprimir=printf
+ingresar=scanf
+retornar=return
+entero=int
+principal=main
+real=float
+si=if
+mientras=while
+para=for
+sino=else
+caracter=char

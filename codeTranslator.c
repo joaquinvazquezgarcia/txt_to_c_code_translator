@@ -1,17 +1,16 @@
 #include <stdio.h>
 #include <string.h>
 
-
 int main() {
 
-    
 
+    
     FILE *cFile;
     FILE *txtFile;
 
     txtFile = fopen("C:\\Users\\joaqu\\Desktop\\txt_to_c_code_translator\\txtfile.txt", "r");  //cambiar ruta si se comparte el codigo a otra pc
     cFile = fopen("C:\\Users\\joaqu\\Desktop\\txt_to_c_code_translator\\cfile.c", "r+");  //cambiar ruta si se comparte el codigo a otra pc
-
+    
     if (cFile == NULL)
     {
         cFile = fopen("C:\\Users\\joaqu\\Desktop\\txt_to_c_code_translator\\cfile.c", "w");
@@ -22,7 +21,7 @@ int main() {
         printf("No se encontro un archivo txt para traducir\n\n");
         return 0;
     }
-
+    
 
     char content[100];
 
@@ -30,7 +29,7 @@ int main() {
     {
         
         int contentStatus = fscanf(txtFile, "%99[^({# \n<]", content);
-
+        
         if (contentStatus == 1)
         {
             if (strcmp(content,"incluir") == 0)
@@ -90,7 +89,7 @@ int main() {
         }
         else if (contentStatus == 0)
         {
-
+            
             int limit = fgetc(txtFile);
             
             
@@ -107,9 +106,9 @@ int main() {
         
         
         
-    
-    }
         
+    }
+    
     
     
     printf("------------------\n");
@@ -118,6 +117,6 @@ int main() {
     
     
     
-
+    
     return 0;
 }
