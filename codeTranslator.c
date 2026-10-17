@@ -1,10 +1,58 @@
 #include <stdio.h>
 #include <string.h>
 
+
+
 int main() {
-
-
     
+    /* DICCIONARIO TRADUCTOR/INDICE */
+
+    int dictionaryLength = 12; //Modificar si se agregan palabras al diccionario
+
+    typedef struct {
+        char spa[dictionaryLength][20];
+        char eng[dictionaryLength][20];
+    } index;
+
+    index Index;
+
+    FILE *dictionary;
+
+    dictionary = fopen("C:\\Users\\joaqu\\Desktop\\txt_to_c_code_translator\\dictionary.txt", "r");
+
+    if (dictionary == NULL)
+    {
+        printf("No se encontró un diccionario de palabras para traducir el código");
+        return 0;
+    }
+    
+    char indexContent[20];
+    int i = 0;
+
+    while (1)
+    {
+        if (fscanf(dictionary, "%[^=]", indexContent) == 1)
+        {    
+            strcpy(Index.spa[i], indexContent);
+            fgetc(dictionary);
+        }
+        
+        if (fscanf(dictionary, "%[^\n]", indexContent) == 1) {
+            strcpy(Index.eng[i], indexContent);
+        }
+
+        if (fgetc(dictionary) == EOF)
+        {
+            break;
+        }
+        
+
+        i++;
+    }
+
+
+
+    /* archivos C y TXT */
     FILE *cFile;
     FILE *txtFile;
 
@@ -21,69 +69,36 @@ int main() {
         printf("No se encontro un archivo txt para traducir\n\n");
         return 0;
     }
+
+
     
 
-    char content[100];
+    char txtFileContent[100];
 
     while (1) 
     {
         
-        int contentStatus = fscanf(txtFile, "%99[^({# \n<]", content);
+        int contentStatus = fscanf(txtFile, "%99[^({# \n<]", txtFileContent);
         
         if (contentStatus == 1)
         {
-            if (strcmp(content,"incluir") == 0)
+
+            int found = 0;
+
+            for (int i = 0; i < dictionaryLength; i++)
             {
-                fprintf(cFile,"include");
+                if ((strcmp(txtFileContent, Index.spa[i]) == 0))
+                {
+                    fprintf(cFile,"%s", Index.eng[i]);
+                    found = 1;
+                    break;
+                }
             }
-            else if (strcmp(content,"si") == 0)
+            if (found == 0)
             {
-                fprintf(cFile,"if");
+                fprintf(cFile,"%s", txtFileContent);
             }
-            else if (strcmp(content,"imprimir") == 0)
-            {
-                fprintf(cFile,"printf");
-            }
-            else if (strcmp(content,"ingresar") == 0)
-            {
-                fprintf(cFile,"scanf");
-            }
-            else if (strcmp(content,"retornar") == 0)
-            {
-                fprintf(cFile,"return");
-            }
-            else if (strcmp(content,"entero") == 0)
-            {
-                fprintf(cFile,"int");
-            }
-            else if (strcmp(content,"principal") == 0)
-            {
-                fprintf(cFile,"main");
-            }
-            else if (strcmp(content,"real") == 0)
-            {
-                fprintf(cFile,"float");
-            }
-            else if (strcmp(content,"mientras") == 0)
-            {
-                fprintf(cFile,"while");
-            }
-            else if (strcmp(content,"para") == 0)
-            {
-                fprintf(cFile,"for");
-            }
-            else if (strcmp(content,"sino") == 0)
-            {
-                fprintf(cFile,"else");
-            }
-            else if (strcmp(content,"caracter") == 0)
-            {
-                fprintf(cFile,"char");
-            }
-            else
-            {
-                fprintf(cFile,"%s", content);
-            }
+           
             
             
         }
@@ -104,9 +119,6 @@ int main() {
             break;
         }
         
-        
-        
-        
     }
     
     
@@ -116,7 +128,9 @@ int main() {
     printf("------------------\n");
     
     
-    
+    fclose(dictionary);
+    fclose(txtFile);
+    fclose(cFile);
     
     return 0;
 }
