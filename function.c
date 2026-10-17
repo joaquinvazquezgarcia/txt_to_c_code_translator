@@ -31,21 +31,17 @@ int main() {
 
     while (1)
     {
-        int engStatus = fscanf(dictionary, "%[^=]", content);
-        if (engStatus == 1)
+        if (fscanf(dictionary, "%[^=]", content) == 1)
         {    
             strcpy(Index.eng[i], content);
             fgetc(dictionary);
         }
         
-        int spaStatus = fscanf(dictionary, "%[^\n]", content);
-        if (spaStatus == 1) {
+        if (fscanf(dictionary, "%[^\n]", content) == 1) {
             strcpy(Index.spa[i], content);
         }
-        int status = fgetc(dictionary);
 
-
-        if (status == EOF)
+        if (fgetc(dictionary) == EOF)
         {
             break;
         }
