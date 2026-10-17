@@ -26,9 +26,9 @@ mientras=while
 1. Configura tus archivos de texto en la ruta especificada.
 2. Compila el archivo fuente:
    ```bash
-   gcc main.c -o traductor
+   gcc main.c -o codeTranslator.c
    ```
 3. Ejecuta el programa:
    ```bash
-   ./traductor
+   ./codeTranslator.c
    ```
