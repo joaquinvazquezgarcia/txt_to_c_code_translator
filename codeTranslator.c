@@ -72,7 +72,6 @@ int main() {
 
 
     
-
     char txtFileContent[100];
 
     while (1) 
@@ -120,7 +119,6 @@ int main() {
         }
         
     }
-    
     
     
     printf("------------------\n");
