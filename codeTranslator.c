@@ -4,10 +4,9 @@
 
 
 int main() {
-    
-    /* DICCIONARIO TRADUCTOR/INDICE */
 
-    int dictionaryLength = 12; //Modificar si se agregan palabras al diccionario
+    /* LONGITUR DEL DICCIONARIO TRADUCTOR/INDICE */
+    int dictionaryLength = 12; //Modificar el valor si se agregan palabras al diccionario
 
     typedef struct {
         char spa[dictionaryLength][20];
